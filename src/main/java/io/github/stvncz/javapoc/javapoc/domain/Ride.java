@@ -3,7 +3,6 @@ package io.github.stvncz.javapoc.javapoc.domain;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,9 +10,11 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Ride {
 
@@ -28,9 +29,6 @@ public class Ride {
     private String destination;
     @NotNull
     private LocalDateTime dateTime;
-    @NotNull
-    @Enumerated
-    private RideStatus status;
     @NotNull
     @Min(0)
     private int availableSeats;

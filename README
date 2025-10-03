@@ -1,0 +1,85 @@
+# JavaPOC – Gestion de Trajets (Ride & Booking)
+
+Ce projet est un Proof Of Concept (POC) Java basé sur Spring Boot, illustrant la gestion de trajets et de réservations dans une architecture orientée microservices.
+
+## Fonctionnalités
+
+- Création, consultation et recherche de trajets (`Ride`)
+- Réservation de places (`Booking`)
+- Validation des données via DTOs
+- Persistance en base H2 embarquée
+- API RESTful documentée et testable
+
+## Structure du projet
+
+```
+src/
+  main/
+    java/
+      io/github/stvncz/javapoc/javapoc/
+        controller/      // Contrôleurs REST
+        controller/dto/  // DTOs pour les échanges API
+        domain/          // Entités JPA
+        repository/      // Repositories Spring Data JPA
+        service/         // Services métier
+    resources/
+      application.properties // Configuration Spring Boot & H2
+  test/
+    java/
+      io/github/stvncz/javapoc/javapoc/
+        JavapocApplicationTests.java // Tests unitaires
+```
+
+## Prérequis
+
+- Java 17+
+- Maven
+
+## Lancement
+
+1. **Installer les dépendances**
+   ```sh
+   mvn clean install
+   ```
+
+2. **Démarrer l’application**
+   ```sh
+   mvn spring-boot:run
+   ```
+
+3. **Accéder à la console H2**
+   - URL : [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+   - JDBC URL : `jdbc:h2:mem:testdb`
+   - User : `sa` / Password : (laisser vide)
+
+## Exemple de requête POST (création d’un trajet)
+
+```json
+POST /rides
+Content-Type: application/json
+
+{
+  "driverName": "Alice",
+  "origin": "Paris",
+  "destination": "Lyon",
+  "availableSeats": 3,
+  "dateTime": "2025-10-03T14:30:00"
+}
+```
+
+## Bonnes pratiques appliquées
+
+- Découpage en couches (controller, service, repository)
+- Utilisation de DTOs pour l’API
+- Validation des données (`@NotNull`, `@Min`, etc.)
+- Gestion des exceptions
+- Tests unitaires
+
+## Pour aller plus loin
+
+- Séparer les domaines en microservices indépendants
+- Ajouter la documentation OpenAPI/Swagger
+- Intégrer une couche de sécurité (Spring Security)
+- Ajouter des tests d’intégration
+
+---
