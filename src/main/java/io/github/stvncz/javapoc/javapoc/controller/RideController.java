@@ -7,6 +7,7 @@ import io.github.stvncz.javapoc.javapoc.controller.dto.RideDto;
 import io.github.stvncz.javapoc.javapoc.domain.Ride;
 import io.github.stvncz.javapoc.javapoc.service.RideService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RequiredArgsConstructor
@@ -37,6 +40,19 @@ public class RideController {
         List<Ride> rides = rideService.getAllRides();
         return ResponseEntity.ok(rides);
     }
+
+    @GetMapping("/ride")
+    public ResponseEntity<Ride> getRideById(@RequestParam Long id) {
+        Ride ride = rideService.getRideById(id);
+        return ResponseEntity.ok(ride);
+    }
+
+    @GetMapping("/origin")
+    public ResponseEntity<List<Ride>> getRidesByOrigin(@NotNull @RequestParam String origin) {
+        List<Ride> rides = rideService.getRidesByOrigin(origin);
+        return ResponseEntity.ok(rides);
+    }
+    
 
     private Ride mapDtoToModel(RideDto dto) {
         Ride ride = new Ride();
