@@ -53,7 +53,6 @@ public class RideController {
         return ResponseEntity.ok(rides);
     }
     
-
     private Ride mapDtoToModel(RideDto dto) {
         Ride ride = new Ride();
         ride.setDriverName(dto.getDriverName());

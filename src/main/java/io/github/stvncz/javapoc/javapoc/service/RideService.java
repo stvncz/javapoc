@@ -3,6 +3,7 @@ package io.github.stvncz.javapoc.javapoc.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import io.github.stvncz.javapoc.javapoc.domain.Ride;
@@ -44,5 +45,19 @@ public class RideService {
 
     public List<Ride> getAllRides() {
         return rideRepository.findAll();
+    }
+
+    public void bookSeat(Long rideId) {
+        Ride ride = getRideById(rideId);
+        try{
+            if (ride.getAvailableSeats() < 1) {
+                throw new IllegalStateException("No available seats");
+            } else {
+                ride.setAvailableSeats(ride.getAvailableSeats() - 1);
+                rideRepository.save(ride);
+            }
+        } catch (ObjectOptimisticLockingFailureException  e) {
+            throw new IllegalStateException("Ride was modified concurrently, please retry");
+        }    
     }
 }
