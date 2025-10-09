@@ -1,6 +1,7 @@
 package io.github.stvncz.javapoc.javapoc.service;
 
 import java.time.LocalDateTime;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -57,7 +58,7 @@ public class RideService {
                 rideRepository.save(ride);
             }
         } catch (ObjectOptimisticLockingFailureException  e) {
-            throw new IllegalStateException("Ride was modified concurrently, please retry");
+            throw new ConcurrentModificationException("Ride was modified concurrently, please retry");
         }    
     }
 }

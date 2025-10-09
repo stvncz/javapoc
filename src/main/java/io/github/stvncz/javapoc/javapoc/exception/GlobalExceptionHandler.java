@@ -1,6 +1,7 @@
 package io.github.stvncz.javapoc.javapoc.exception;
 
 import java.time.LocalDateTime;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    @ExceptionHandler(ConcurrentModificationException.class)
     public ResponseEntity<Map<String, Object>> handleOptimisticLockingFailureException(ObjectOptimisticLockingFailureException ex) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());

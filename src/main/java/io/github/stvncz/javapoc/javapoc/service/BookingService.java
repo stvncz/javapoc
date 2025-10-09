@@ -1,10 +1,11 @@
 package io.github.stvncz.javapoc.javapoc.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.stvncz.javapoc.javapoc.domain.Booking;
 import io.github.stvncz.javapoc.javapoc.repository.BookingRepository;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 
 @Service
 public class BookingService {
